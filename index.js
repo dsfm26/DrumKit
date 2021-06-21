@@ -1,12 +1,16 @@
 var buttons = document.querySelectorAll(".drum");
 for (var i = 0; i < buttons.length; i++) {
   buttons[i].addEventListener("click", function () {
-    checkAndPlayInstrument(this.innerHTML);
+    var key = this.innerHTML;
+    checkAndPlayInstrument(key);
+    buttonAnimation(key);
   });
 }
 
 document.addEventListener("keydown", function (event) {
-  checkAndPlayInstrument(event.key);
+    var key = event.key;
+  checkAndPlayInstrument(key);
+  buttonAnimation(key);
 });
 
 function checkAndPlayInstrument(key) {
@@ -42,4 +46,12 @@ function checkAndPlayInstrument(key) {
     default:
       console.log(buttonInnerHTML);
   }
+}
+
+function buttonAnimation(key){
+    var activeButton = document.querySelector("." + key);
+    activeButton.classList.add("pressed");
+    setTimeout(function(){
+        activeButton.classList.remove("pressed");
+    }, 100)
 }
